@@ -1,0 +1,58 @@
+header,footer{
+    display: flex;
+    justify-content: space-between;
+   
+    padding: 2%;
+    border-radius: 10%;
+    background: linear-gradient(to right,rgb(107, 184, 210),rgb(127, 223, 254));
+    font-size: x-large;
+    font-weight: bolder;
+}
+main{
+    
+      
+}
+#section1{
+    display: flex;
+    justify-content: space-around;
+    padding:10%;
+    gap: 20%;
+    font-weight: 300;
+    font-family:'Times New Roman', Times, serif;
+    font-size: x-large;
+    
+  
+}
+
+#section2{
+    display: flex;
+    justify-content: space-around;
+    background-color:bisque;
+    border-radius: 20px;
+    border-left: 4px solid brown;
+    border-right: 4px solid brown;
+    border-top:2px solid brown ;
+      
+}
+#Qualifications{
+    
+}
+#work_expericance{
+    width: 40%;
+    border-right: 1px dashed brown;
+    display: flex;
+    flex-direction: column;
+
+}
+footer{
+    display: flex;
+    justify-content: space-around;
+     
+}
+#nav_buttons{
+    display: flex;
+    gap: 20px;
+}
+footer{
+  border-radius: 0px;
+}
