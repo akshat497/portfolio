@@ -1,18 +1,24 @@
-header,footer{
+header{
+    position: sticky;
+    top: 0;
     display: flex;
     justify-content: space-between;
-   
-    padding: 2%;
-    border-radius: 10%;
-    background: linear-gradient(to right,rgb(107, 184, 210),rgb(127, 223, 254));
+    align-items: center;
+    padding-right: 1%;
+    border: 0.5px solid brown;
+    background-color: bisque;
     font-size: x-large;
     font-weight: bolder;
+    border-radius: 5px;
+    z-index: 999;
 }
 main{
+    margin: 4%;
     
       
 }
 #section1{
+   
     display: flex;
     justify-content: space-around;
     padding:10%;
@@ -20,6 +26,7 @@ main{
     font-weight: 300;
     font-family:'Times New Roman', Times, serif;
     font-size: x-large;
+    position: relative  ;
     
   
 }
@@ -32,27 +39,179 @@ main{
     border-left: 4px solid brown;
     border-right: 4px solid brown;
     border-top:2px solid brown ;
+    border-bottom: 2px solid brown;
+    box-shadow: 2px 2px 5px  brown;
       
 }
 #Qualifications{
     
 }
 #work_expericance{
-    width: 40%;
+    width: 45%;
     border-right: 1px dashed brown;
     display: flex;
     flex-direction: column;
 
 }
-footer{
-    display: flex;
-    justify-content: space-around;
-     
-}
+
 #nav_buttons{
     display: flex;
     gap: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: brown;
+    cursor: pointer;
 }
+#nav_buttons a{
+    text-decoration: none;
+    color: brown;
+}
+.mediaLinks{
+    display: flex;
+    gap: 20px;
+    width: max-content;
+   
+   
+}
+.mediaLinks a{
+    color: black;
+    text-decoration: none;
+}
+
 footer{
-  border-radius: 0px;
+    display: flex;
+    flex-direction: column;
+    background-color: bisque;
+    border: 0.5px solid brown;
+    padding:1%;
+    gap: 10px;
+    align-items: center;
+    font-size: larger;
+}
+.contact_details{
+    display: flex;
+    gap: 10px;
+}
+.typing-container {
+  
+  white-space: nowrap;
+  overflow: hidden;
+  animation: typing 4s steps(28) infinite;
+  animation-delay: 2s;
+  font-size: 1.2rem;
+  color: brown;
+  font-family: monospace;
+  position: absolute;
+  right: 10%;
+}
+
+@keyframes typing {
+  0% {width: 0;}
+  40% { width: 30ch  }
+  60% { width: 30ch; }
+  100% { width: 0; }
+}
+#image{
+    position: absolute;
+   
+    left: 20%;
+    top: 20%;
+}
+
+.tech-marquee {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  color: black;
+  padding: 15px 0;
+  font-family: monospace;
+ margin: 5%;
+  position: relative;
+ 
+}
+
+.scroll {
+   
+  display: inline-block;
+  animation: scrollLeft 30s linear infinite;
+}
+
+.scroll span {
+  display: inline-block;
+  margin: 0 40px ;
+
+  font-size: 30px;
+}
+
+/* Animation keyframes */
+@keyframes scrollLeft {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+   0% { transform: translateX(-100%); }
+}
+
+#subscribe{
+    
+   display: flex;
+   flex-wrap: nowrap;
+   /* overflow: scroll;
+   scrollbar-width: none; */
+   gap: 5px;
+}
+#subscribe :first-child{
+    padding: 2%;
+    border-radius: 10px;
+    border: none;
+}
+#subscribe :last-child{
+    padding: 2%;
+    cursor: pointer;
+    background-color:brown;
+    color: white;
+    font-weight: bolder;
+    border-radius: 10px;
+}
+
+#subscribe :last-child:hover{
+    background-color: rgb(203, 41, 41);
+}
+
+#headerText{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    transition: all 1s ease-in-out ;
+    animation: shining 8s forwards infinite;
+    
+}
+
+@keyframes shining{
+    from{transform: scale(1)skew(0deg) }
+    to{transform: scale(1.2) skew(20deg)}
+}
+#ContactDetails{
+    display: flex;
+    border: 2px solid brown;
+    box-shadow: 2px 2px 12px bisque;
+    justify-content: space-around;
+    padding: 1%;
+    background-color: bisque;
+    border-radius: 10px;
+
+
+}
+#maps{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: brown;
+    font-weight: 700;
+    gap: 20px;
+     padding-right: 10%;
+    border-right: 2px dashed brown;
+    
+}
+
+#details{
+   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
