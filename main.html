@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+        //premetive
+      let string="string";
+      let number=123;
+      let float=12.22;
+      let char="v";
+      let boolean=true || false;
+      let value=null;
+      let bigInt=123456789;
+      let UD=undefined;
+
+      //non premetive
+                 //0.      1.  2.    3.        4. 
+      let array=["akshat",123,23.33,undefined,null]
+
+      let object={
+        name:"akshat",
+        phone:123456,
+        address:"delhi"
+      }
+      function kanika(){
+        let a=10;
+        let b=30;
+        let c=a+b;
+        console.log(c)
+        
+      }
+
+
+      function logic(a,b,name){
+        c=a+b
+
+        console.log("sum of ",name,c)
+        
+
+      }
+
+      logic(3,5,"vikas")
+       logic(3,15,"sumit");
+
+    //    const fun=function (){ //ananomous function
+    //     console.log("i ama expression function")
+    //    }
+       
+      (function(){console.log("hello i am self calling function")})();//iife   immediately invoked function expression
+   (function (){})()
+
+   const name=(a,b)=> a+b//arrow functions
+
+   console.log(name(10,20));
+   //browser apis
+
+//    setTimeout(() => {
+//        console.log("hiii ")
+//    }, 2000);
+//    setInterval(() => {
+//     console.log("hello")
+//    }, 2000);
+
+       //higher order function in js
+
+    //    function first(a,b){
+    //     debugger
+    //     console.log("first function is loggin",a+b)
+    // }
+
+    //    function second(a,b,c){
+    //     debugger
+    //     c(a,b)
+    //    }
+
+    //    second(10,20,first);
+ 
+
+
+
+    function akshat(a,b){
+
+        return a+b
+    }
+
+
+
+    akshat(10,20)
+
+    //recursive functions
+     function counter(n){
+        
+        console.log(n)
+        if(n==0) return
+
+        counter(n-1)
+
+     }
+
+     counter(10);
+
+     //loops in js
+    //  for do while while 
+         //.   0.        1.      2.      3.       4.      5.      6.     7
+    let arr=["akshat","vikas","sumit","vishal","rihan","kanika","sneha","arpita"]
+    // for(let i=0; i<=10;i++){
+    //     console.log(arr[i])
+    // }
+    let j=0
+    while(j<=7){
+        console.log("from while ",arr[j])
+        j++
+    }
+
+    
+
+console.log("join('-'):", ["a","b","c"].join("-"));
+//.       0.  1. 2
+let a2 = [10,20,30];
+console.log("with(1, 200):", a2.with(1,200));
+
+let a3 = [1,2,3,4];
+console.log("toSpliced(1,2,99):", a3.toSpliced(1,2,99));
+
+console.log("findLast(x > 10):", [5,12,18].findLast(x => x > 10));
+console.log("findLastIndex(x > 10):", [5,12,18].findLastIndex(x => x > 10));
+
+
+let user={name:"akshat",age:24}
+
+let keys=Object.keys(user)
+console.log("keys of the uesr",keys)
+
+
+const product = { id: 1, price: 500, stock: 20 };
+let keys2=Object.keys(product)
+console.log("keys2 of the product",keys2)
+
+
+
+
+
+
+let number1=prompt("enter the length of array")
+let newArr=[]
+for(let i=0;i<number1;i++){
+
+    let arrayValue=prompt("enter array value ",i)
+    newArr.push(arrayValue)
+
+}
+while(true){
+    console.log("1 add values in array")
+    console.log("2 delete values from array")
+    console.log("20 for exit")
+
+
+
+
+
+    let choice=prompt("enter ur choice")
+    if(choice==1){
+        let newvalue=prompt("enter value to be pushed in the array")
+        newArr.push(newvalue)
+        console.log(newArr)
+    }else if(choice==2){
+       let index=prompt("enter value to be deleted in the array")
+       newArr.slice(index)
+       console.log(newArr)
+    }else if(choice==20){
+        break;
+    }
+}
+
+    </script>
+    
+</body>
+</html>
