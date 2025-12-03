@@ -105,4 +105,13 @@ def dictionary_tool():
             print("Invalid choice. Try again.")
 
 # Run the tool
-dictionary_tool()
+# dictionary_tool()
+
+
+name = "Akshat"
+
+age = 21
+
+print(f"My name is {name} and I am {age} years old")
+
+print("apple" < "apple") 

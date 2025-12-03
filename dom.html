@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    
+
+   <h1>Font styling application</h1>
+   <label>
+    write paragraph:<input placeholder="write a paragraph here" id="paragraph"></input>
+   </label>
+<label>
+    color:<input placeholder="write color name" id="color"></input>
+   </label>
+   <p></p>
+<script>
+  
+  
+    let textarea=document.getElementById("paragraph")
+       let color=document.getElementById("color")
+    let paragraph=document.querySelector('p')
+
+    textarea.addEventListener("input",()=>{
+ 
+        paragraph.innerText=textarea.value}
+    
+    )
+     color.addEventListener("input",()=>{
+        paragraph.style.color=color.value
+    
+    }
+    
+    )
+console.log(color)
+
+
+let arr=[1,2,3,4,5]
+
+let [a,b,c,...rest]=arr;
+
+
+console.log(a,b,c,rest)
+    
+
+    
+   
+
+</script>
+
+    
+</body>
+</html>

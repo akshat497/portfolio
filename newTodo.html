@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        width: max-content;
+        padding: 2%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-self: center;
+        justify-self: center;
+        box-shadow: 5px 5px 22px grey;
+        border-radius: 10px;
+      }
+      .container input {
+        width: 40vh;
+        height: 4vh;
+      }
+      .container button {
+        background-color: skyblue;
+        color: white;
+        padding: 2%;
+        border: none;
+        border-radius: 5px;
+      }
+      #taskContainer {
+        width: 50vh;
+      }
+      .childDiv {
+        background-color: whitesmoke;
+        box-shadow: 2px 2px 12px grey;
+        border-radius: 10px;
+        padding: 20px;
+        width: max-content;
+        margin: 2%;
+        font-size: xx-large;
+        font-weight: bolder;
+
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <h2>Todo List</h2>
+        <div id="taskContainer">
+          <input type="text" id="taskInput" />
+          <button id="add">Add</button>
+        </div>
+      </div>
+    </main>
+    <script>
+      let input = document.getElementById("taskInput"); //getting div from the id
+      let container = document.querySelector(".container"); //getting div from the class thats why using th . and the querry selector
+      let button = document.getElementById("add");
+       var parent=document.createElement('div')
+      let tasks = [];
+      //                       type of event can be click type submit doubleclick.   this is the callback function which will be executed when the click event happend
+      button.addEventListener("click", () => {
+        addTask();
+      });
+      function addTask() {
+       
+       
+        let task = {
+          id: Date.now(),
+          text:input.value,
+          important: false,
+        };
+       
+        tasks.push(task);
+        console.log(tasks)
+        getTasks();
+      }
+      function getTasks() {
+       
+        parent.innerHTML=""
+       
+        tasks.forEach((value, index) => {
+             let div = document.createElement("div");
+ div.className = "childDiv";
+        let delButton = document.createElement("button");
+        delButton.innerText="delete"
+         
+        delButton.style.padding="10px"
+        delButton.style.backgroundColor="red"
+          div.innerHTML = value.text;
+          div.style.color=value.important?"red":"green"
+          console.log(container);
+          delButton.addEventListener('click',()=>{deleteTask(index)})
+          div.appendChild(delButton)
+          parent.appendChild(div);
+          container.appendChild(parent)
+        });
+      }
+
+      function deleteTask(index){
+        console.log(index)
+        tasks.splice(index,1)
+        console.log(tasks)
+        getTasks()
+
+      }
+    </script>
+  </body>
+</html>

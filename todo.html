@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>To-Do List</title>
+<style>
+    body {
+        font-family: Arial;
+        background: #f3f3f3;
+        margin: 0;
+        padding: 20px;
+        transition: 0.3s;
+    }
+
+    .container {
+        width: 400px;
+        margin: auto;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #cfcfcf;
+        transition: 0.3s;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    input {
+        width: 65%;
+        padding: 10px;
+        margin-right: 5px;
+    }
+
+    button {
+        padding: 10px 15px;
+        cursor: pointer;
+        border: none;
+        background: #3498db;
+        color: white;
+        border-radius: 5px;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin-top: 20px;
+    }
+
+    li {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        margin-bottom: 8px;
+        background: #fafafa;
+        border-left: 4px solid transparent;
+        border-radius: 5px;
+        transition: 0.2s;
+    }
+
+    /* Important task highlight */
+    .important {
+        border-left-color: #e74c3c;
+        background: #fff1f1;
+    }
+
+    /* Dark mode styles */
+    .dark {
+        background: #1e1e1e;
+        color: white;
+    }
+
+    .dark .container {
+        background: #2a2a2a;
+        box-shadow: 0 0 10px #111;
+        color: white;
+    }
+
+    .dark li {
+        background: #444;
+        color: white;
+        border-left-color: transparent;
+    }
+</style>
+</head>
+<body>
+
+<button id="darkModeBtn" style="float:right">🌙 Dark Mode</button>
+
+<div class="container">
+    <h2>To-Do List</h2>
+
+    <input type="text" id="taskInput" placeholder="Enter task...">
+    <button onclick="addTask()">Add</button>
+
+    <ul id="taskList"></ul>
+</div>
+
+<script>
+const taskList = document.getElementById("taskList");
+const taskInput = document.getElementById("taskInput");
+const darkBtn = document.getElementById("darkModeBtn");
+
+// Array to store tasks
+let tasks = [];
+
+// Add task
+function addTask() {
+    let text = taskInput.value.trim();
+    if (!text) return alert("Please enter a task!");
+
+    let task = {
+        id: Date.now(),
+        text,
+        important: false
+    };
+
+    tasks.push(task);
+    taskInput.value = "";
+    renderTasks();
+}
+
+// Toggle dark mode
+darkBtn.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    darkBtn.textContent = document.body.classList.contains("dark") 
+        ? "☀️ Light Mode" 
+        : "🌙 Dark Mode";
+});
+
+// Render all tasks to UI
+function renderTasks() {
+    taskList.innerHTML = "";
+
+    tasks.forEach(task => {
+        let li = document.createElement("li");
+        li.className = task.important ? "important" : "";
+
+        li.innerHTML = `
+            <span>${task.text}</span>
+
+            <div>
+                <button style="background:#f39c12" onclick="markImportant(${task.id})">⭐</button>
+                <button style="background:#e74c3c" onclick="deleteTask(${task.id})">🗑</button>
+            </div>
+        `;
+
+        taskList.appendChild(li);
+    });
+}
+
+// Mark task as important
+function markImportant(id) {
+    tasks = tasks.map(t =>
+        t.id === id ? {...t, important: !t.important} : t
+    );
+    renderTasks();
+}
+
+// Delete task
+function deleteTask(id) {
+    tasks = tasks.filter(t => t.id !== id);
+    renderTasks();
+}
+</script>
+
+</body>
+</html>
