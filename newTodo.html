@@ -40,7 +40,24 @@
         margin: 2%;
         font-size: xx-large;
         font-weight: bolder;
-
+        display: flex;
+        justify-content: space-around;
+        width: fit-content;
+        gap: 10px;
+        position: relative;
+      }
+      .tasksholder {
+        width: fit-content;
+      }
+      .badge {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin-bottom: 2%;
+        font-weight: bolder;
+        color: aliceblue;
+        background-color: red;
+        border-radius: 10px;
       }
     </style>
   </head>
@@ -58,54 +75,116 @@
       let input = document.getElementById("taskInput"); //getting div from the id
       let container = document.querySelector(".container"); //getting div from the class thats why using th . and the querry selector
       let button = document.getElementById("add");
-       var parent=document.createElement('div')
-      let tasks = [];
+      var parent = document.createElement("div");
+      var badge = document.createElement("div");
+
+      badge.className = "badge";
+      badge.innerText = "completed";
+      parent.className = "tasksholder";
+      let tasks = JSON.parse(localStorage.getItem("tasks")) ||[];
+
+      if(tasks!=[]){
+        getTasks()
+      }
+
       //                       type of event can be click type submit doubleclick.   this is the callback function which will be executed when the click event happend
       button.addEventListener("click", () => {
         addTask();
       });
       function addTask() {
-       
-       
         let task = {
           id: Date.now(),
-          text:input.value,
+          text: input.value,
           important: false,
+          complete: false,
         };
-       
+
         tasks.push(task);
-        console.log(tasks)
+        localStorage.setItem("tasks",JSON.stringify(tasks))
+        console.log(tasks);
         getTasks();
       }
       function getTasks() {
-       
-        parent.innerHTML=""
-       
+        parent.innerHTML = "";
+
         tasks.forEach((value, index) => {
-             let div = document.createElement("div");
- div.className = "childDiv";
-        let delButton = document.createElement("button");
-        delButton.innerText="delete"
-         
-        delButton.style.padding="10px"
-        delButton.style.backgroundColor="red"
+          //creating buttons with javascript
+          let div = document.createElement("div");
+          let delButton = document.createElement("button");
+          let impButton = document.createElement("button");
+          let completeButton = document.createElement("button");
+
+          //setting innertext of the buttons
+          div.className = "childDiv";
+          delButton.innerText = "delete";
+          impButton.innerText = "*";
+          completeButton.innerText = "complete";
+
+          //del button
+          delButton.style.padding = "10px";
+          delButton.style.backgroundColor = "red";
+          //imp button
+          impButton.style.padding = "10px";
+          impButton.style.backgroundColor = "lightgreen";
+
           div.innerHTML = value.text;
-          div.style.color=value.important?"red":"green"
-          console.log(container);
-          delButton.addEventListener('click',()=>{deleteTask(index)})
-          div.appendChild(delButton)
+
+          //styling buttons with javascript
+          div.style.backgroundColor = value.important ? "lightGreen" : "";
+          div.style.borderLeftColor = value.important ? "darkGreen" : "";
+          div.style.borderLeftWidth = "20px";
+
+          //badge css
+          badge.style.display = value.complete ? "block" : "none";
+
+          //adding event listeners to the buttons with javascript
+          delButton.addEventListener("click", () => {
+            deleteTask(index);
+          });
+          impButton.addEventListener("click", () => {
+            markImportant(value.id);
+          });
+          completeButton.addEventListener("click", () => {
+            markComplete(value.id);
+          });
+          //appending elemt in the dom
+
+          div.appendChild(impButton);
+          div.appendChild(delButton);
+          div.appendChild(completeButton);
+          div.appendChild(badge);
           parent.appendChild(div);
-          container.appendChild(parent)
+          container.appendChild(parent);
         });
       }
 
-      function deleteTask(index){
-        console.log(index)
-        tasks.splice(index,1)
-        console.log(tasks)
-        getTasks()
-
+      function deleteTask(index) {
+        console.log(index);
+        tasks.splice(index, 1);
+        localStorage.setItem("tasks",JSON.stringify(tasks))
+        console.log(tasks);
+        getTasks();
       }
+
+      function markImportant(ID) {
+        debugger;
+        //finding the ID that we have passed in the markimporantant function arguments in the tasks array and if the id matches then we are markign tasks.imporant key as TRUE which by default was FALSE
+        let impTask = tasks.find((value) => {
+          debugger;
+          return value.id == ID;
+        });
+        impTask.important = true;
+        getTasks();
+      }
+
+      const markComplete = (ID) => {
+        let completedTask = tasks.find((value) => {
+          debugger;
+          return value.id == ID;
+        });
+        completedTask.complete = true;
+        getTasks();
+      };
     </script>
   </body>
 </html>
