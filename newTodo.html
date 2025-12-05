@@ -185,6 +185,36 @@
         completedTask.complete = true;
         getTasks();
       };
+      let promis= new Promise((resolve, reject) => {
+        let success=undefined;
+        // if(success==true){
+        //   resolve("task completed")
+
+        // }else{
+        //   reject("somthing went wrong")
+        // }
+        
+      });
+      promis.then((value)=>{console.log(value)}).catch((value)=>{console.log(value)}).finally(()=>{})
+
+   fetch("https://jsonplaceholder.typicode.com/posts", {
+    method: "GET",
+    headers: {
+        "Content-Type": "application/json"
+    }
+})
+  .then(response => response.json())
+  .then(data => {
+      data.forEach(user => {
+          let p = document.createElement("p");
+          p.innerText = user.title;
+          parent.appendChild(p);
+      });
+  })
+  .catch(error => console.log(error));
+
+      
+   
     </script>
   </body>
 </html>
