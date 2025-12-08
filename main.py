@@ -117,18 +117,51 @@
 # print("apple" "apple") 
 
 
-class Student:
+# class Student:
 
- school = "ABC International School" # class attribute
+#  school = "ABC International School" # class attribute
 
- def __init__(self, name, age):
-     self.name = name # instance attributes
-     self.age = age
+#  def __init__(self, name, age):
+#      self.name = name # instance attributes
+#      self.age = age
 
-s1 = Student("Aman", 18)
+# s1 = Student("Aman", 18)
 
-s2 = Student("Riya", 17)
+# s2 = Student("Riya", 17)
 
-print(s1.school, s2.school)
+# print(s1.school, s2.school)
 
-print(s1.name, s2.name)
+# print(s1.name, s2.name)
+
+class Car:
+       name="akshat"
+       def __init__(abc, brand, color):
+               abc.brand = brand # attribute. #car1.branc="tesla"
+               abc.color = color #car1.color="red" 
+       def drive(abc):
+           print(f"{abc.brand} is driving...")
+# Object
+car1 = Car("Tesla", "Red")
+car2 = Car("BMW",'bluw')
+car1.drive()
+
+print(car2.name)
+
+
+class Employee:
+    company = "Google"          # class attribute shared by all employees
+
+    @classmethod#            meta
+    def change_company(cls, new_company):
+        cls.company = new_company #meta
+
+# Usage:
+print(Employee.company)         # "Google"
+Employee.change_company("Meta")
+print(Employee.company)         # "Meta"
+
+emp = Employee()
+emp.change_company("Amazon")    # works too
+print(Employee.company)         # "Amazon"
+
+

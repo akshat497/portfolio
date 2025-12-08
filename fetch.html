@@ -6,87 +6,135 @@
     <title>Document</title>
   </head>
   <style>
-   .cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 20px;
-}
+    body {
+      margin: 0;
+    }
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
 
-.card {
-    background: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    transition: 0.3s ease;
-    display: flex;
-    flex-direction: column;
-}
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transition: 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
 
-.card:hover {
-    transform: translateY(-5px);
-}
+    .card:hover {
+      transform: translateY(-5px);
+    }
 
-.card img {
-    width: 100%;
-    height: 320px;
-    object-fit: cover;
-}
+    .card img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+    }
 
-.card-body {
-    padding: 15px;
-    flex-grow: 1;
-}
+    .card-body {
+      padding: 15px;
+      flex-grow: 1;
+    }
 
-.card h3 {
-    margin: 0 0 8px 0;
-    font-size: 18px;
-}
+    .card h3 {
+      margin: 0 0 8px 0;
+      font-size: 18px;
+    }
 
-.genres {
-    font-size: 14px;
-    color: #666;
-}
+    .genres {
+      font-size: 14px;
+      color: #666;
+    }
 
-.rating {
-    margin-top: 6px;
-    font-weight: bold;
-    color: #ff9800;
-}
+    .rating {
+      margin-top: 6px;
+      font-weight: bold;
+      color: #ff9800;
+    }
 
-.more-info {
-    margin-top: 12px;
-    display: inline-block;
-    padding: 8px 12px;
-    background: #007bff;
-    color: white;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 14px;
-}
+    .more-info {
+      margin-top: 12px;
+      display: inline-block;
+      padding: 8px 12px;
+      background: #007bff;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    Header {
+      display: flex;
+      justify-content: space-between;
+      background-color: antiquewhite;
+      padding: 1.5%;
+      border: 2px solid brown;
+      border-radius: 10px;
+    }
 
+    Header input[type="search"] {
+      height: 4vh;
+      border: none;
+      border-radius: 10px;
+      padding: 5px;
+    }
+    header input[type="search"]:focus {
+      border: 2px solid brown;
+      outline: none;
+      box-shadow: 0 0 5px brown;
+    }
+    #results {
+      overflow: scroll;
+      height: 100px;
+      width: 150px;
+      font-size: small;
+      display: none;
+    }
   </style>
   <body>
+    <header>
+      <div>Logo</div>
+      <div>
+        <input type="search" placeholder="search..." id="search" />
+        <div id="results"></div>
+      </div>
+    </header>
     <div id="parent" class="cards-container"></div>
 
     <div id="parent"></div>
     <script>
-    
-let parent = document.getElementById("parent");
 
-async function loadShows() {
-    try {
-        const response = await fetch("https://api.tvmaze.com/shows");
-        const shows = await response.json();
+        
+      let parent = document.getElementById("parent");
+      let searchBar = document.getElementById("search");
+      const resultsDiv = document.getElementById("results");
+      searchBar.addEventListener("input", () => {
+        search();
+      });
 
-        shows.forEach(show => {
+      async function getData() {
+        var response = await fetch("https://api.tvmaze.com/shows");
+        var shows = await response.json();
+        return shows;
+      }
+      async function loadShows() {
+        try {
+          let resp = await getData();
+
+          resp.forEach((show) => {
             // Create card
             let card = document.createElement("div");
             card.className = "card";
 
             // Image
             let img = document.createElement("img");
-            img.src = show.image?.medium || "https://via.placeholder.com/250x350?text=No+Image";
+            img.src =
+              show.image?.medium ||
+              "https://via.placeholder.com/250x350?text=No+Image";
 
             // Card body
             let body = document.createElement("div");
@@ -99,9 +147,9 @@ async function loadShows() {
             // Genres
             let genres = document.createElement("div");
             genres.className = "genres";
-            genres.innerText = show.genres.length 
-                ? "Genres: " + show.genres.join(", ") 
-                : "Genres: N/A";
+            genres.innerText = show.genres.length
+              ? "Genres: " + show.genres.join(", ")
+              : "Genres: N/A";
 
             // Rating
             let rating = document.createElement("div");
@@ -119,16 +167,50 @@ async function loadShows() {
             body.append(title, genres, rating, link);
             card.append(img, body);
             parent.appendChild(card);
+          });
+        } catch (error) {
+          console.log("Error:", error);
+        }
+      }
+      async function search() {
+        let resp = await getData();
+        console.log(resp);
+        let keyword = searchBar.value.trim().toLowerCase();
+
+        // If searchBar empty → hide results and stop
+        if (keyword === "") {
+          resultsDiv.style.display = "none";
+          resultsDiv.innerHTML = "";
+          return;
+        }
+        let filtered = resp.filter((item) =>
+          item.name.toLowerCase().includes(searchBar.value.toLowerCase())
+        );
+
+        displayResults(filtered);
+      }
+
+      function displayResults(data) {
+        resultsDiv.innerHTML = ""; // Clear old results
+        if (data.length === 0) {
+          resultsDiv.innerHTML = "";
+          resultsDiv.style.display = "none";
+        } else {
+          resultsDiv.style.display = "block";
+        }
+        data.forEach((item) => {
+          let div = document.createElement("div");
+          div.classList.add("card");
+
+          div.innerHTML = `
+            <h3>${item.name}</h3>
+          
+        `;
+
+          resultsDiv.appendChild(div);
         });
-
-    } catch (error) {
-        console.log("Error:", error);
-    }
-}
-
-loadShows();
-
-
+      }
+      loadShows();
     </script>
   </body>
 </html>
