@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        height: 100px;
+        width: max-content;
+        border: 2px solid black;
+      }
+      .container {
+        border: 2px solid black;
+        padding: 2%;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .newdiv{
+        height: 100px;
+        width: 100px;
+        background-color: aqua;
+        border: 2px solid black;
+        margin: 1%;
+      }
+     .parentDivOfAd{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99;
+
+    backdrop-filter: blur(6px); /* Blur working */
+    background: rgba(0,0,0,0.4); /* Dark transparent overlay */
+}
+
+.childDivOfAd{
+    height: 250px;
+    width: 350px;
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.3);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+.closedAd{
+    display: none;
+   
+}
+.closed{
+     position: absolute;
+    top: 0;
+    right: 0;
+   font-weight: bolder;
+   color: red;
+   font-size: larger;
+   cursor: pointer;
+}
+
+    </style>
+  </head>
+  <body>
+    <script>
+      let parentDiv = document.createElement("div");
+      let users = [
+        {
+          name: "Akshat",
+          phone: 9123456780,
+          address: "Delhi",
+          role: "Trainer",
+        },
+        {
+          name: "Riya",
+          phone: 9876501234,
+          address: "Mumbai",
+          role: "Student",
+        },
+        {
+          name: "Aman",
+          phone: 9090909090,
+          address: "Bangalore",
+          role: "Developer",
+        },
+        {
+          name: "Neha",
+          phone: 9988776655,
+          address: "Hyderabad",
+          role: "Designer",
+        },
+        {
+          name: "Karan",
+          phone: 8800112233,
+          address: "Pune",
+          role: "Trainer",
+        },
+        {
+          name: "Meera",
+          phone: 9345678910,
+          address: "Chennai",
+          role: "HR",
+        },
+        {
+          name: "Vikas",
+          phone: 8456789012,
+          address: "Kolkata",
+          role: "Manager",
+        },
+        {
+          name: "Sanya",
+          phone: 9012345678,
+          address: "Jaipur",
+          role: "Student",
+        },
+        {
+          name: "Rohan",
+          phone: 9801234567,
+          address: "Surat",
+          role: "Developer",
+        },
+        {
+          name: "Priya",
+          phone: 9321456789,
+          address: "Ahmedabad",
+          role: "QA",
+        },
+      ];
+      //show the user details on the card    method to read array length is .length
+      //   for (let i = 0; i <users.length; i++) {
+      //     let div = document.createElement("div");
+      //      console.log(users[i].name)
+      //     div.className = "box";
+      //     div.innerHTML=`<div>
+      //         <ul>
+      //             <li>${users[i].name}</li>
+      //             <li>${users[i].phone}</li>
+      //             <li>${users[i].address}</li>
+      //             <li>${users[i].role}</li>
+      //             </ul>
+
+      //         <div>`
+      //     parentDiv.className = "container";
+      //     parentDiv.appendChild(div);
+      //     document.body.appendChild(parentDiv);
+      //   }
+
+      users.forEach((object) => {
+        let div = document.createElement("div");
+
+        div.className = "box";
+        div.innerHTML = `<div>
+            <ul>
+                <li>${object.name}</li>
+                <li>${object.phone}</li>
+                <li>${object.address}</li>
+                <li>${object.role}</li>
+                </ul>
+            
+            <div>`;
+        parentDiv.className = "container";
+        parentDiv.appendChild(div);
+        document.body.appendChild(parentDiv);
+      });
+
+      let a=0;
+      while(a<10){
+        console.log("loop")
+        a++
+      }
+      do{
+        console.log(a)
+        a++
+      }while(a<10)
+
+      function newDiv(a,b){
+      let newDiv=document.createElement("div")
+      newDiv.className="newdiv"
+      newDiv.innerHTML=`<div>
+        <ul>
+            <li>${a}</li>
+             <li>${b}</li>
+            </ul>
+        </div>`
+      return newDiv
+      }
+      document.body.appendChild(newDiv("akshat",7056275526))
+     console.log(newDiv("akshat",7056275526));
+
+     (function(){
+        let parentDivOfAd=document.createElement("div")
+         let childDivOfAd=document.createElement("div")
+     
+         let closeBTN=document.createElement("submit")
+         closeBTN.className="closed"
+         closeBTN.innerText="+"
+    
+         closeBTN.addEventListener("click",()=>{parentDivOfAd.className="closedAd"})
+
+         parentDivOfAd.className="parentDivOfAd"
+         childDivOfAd.className="childDivOfAd"
+         
+         childDivOfAd.innerText="Buy this product"
+         childDivOfAd.appendChild(closeBTN)
+         parentDivOfAd.appendChild(childDivOfAd)
+         parentDiv.append(parentDivOfAd)
+         
+    
+     })()
+
+    
+    </script>
+  </body>
+</html>

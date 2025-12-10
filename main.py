@@ -165,3 +165,18 @@ emp.change_company("Amazon")    # works too
 print(Employee.company)         # "Amazon"
 
 
+class animal:
+    def bark(self):
+        print("eating")
+        
+        
+        
+class dog(animal):
+    def bark(self):
+        print("barking...")
+        
+        
+d=dog()
+
+
+d.bark()     
