@@ -165,6 +165,7 @@
 # print(Employee.company)         # "Amazon"
 
 
+<<<<<<< HEAD
 # f = open("new.txt", "r")
 # content = f.read()
 # print(content)
@@ -179,3 +180,20 @@
 f=open("new.txt","w")
 f.write("hello new text")
 f.close()
+=======
+class animal:
+    def bark(self):
+        print("eating")
+        
+        
+        
+class dog(animal):
+    def bark(self):
+        print("barking...")
+        
+        
+d=dog()
+
+
+d.bark()     
+>>>>>>> ed65e475f819cb6e826db339cb9c00eeaf64b2fc
