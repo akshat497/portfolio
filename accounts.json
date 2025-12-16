@@ -1,0 +1,11 @@
+{
+    "223344": {
+        "account_number": "2025-12-1644",
+        "name": "akshat",
+        "age": "12",
+        "aadhar_card_number": "1234",
+        "pan_card_number": "4321",
+        "phone_number": "223344",
+        "balance": 1234.0
+    }
+}
